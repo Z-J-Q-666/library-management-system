@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${LMS_DB_URL:jdbc:mysql://127.0.0.1:3306/lms?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false}
+    username: ${LMS_DB_USERNAME:root}
+    password: ${LMS_DB_PASSWORD:}
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+
+  data:
+    redis:
+      host: ${LMS_REDIS_HOST:127.0.0.1}
+      port: ${LMS_REDIS_PORT:6379}
+      password: ${LMS_REDIS_PASSWORD:}
+      database: ${LMS_REDIS_DATABASE:0}
+      timeout: 3s
+
+  cache:
+    type: redis
+    redis:
+      time-to-live: 30m
+
+lms:
+  jwt:
+    secret: ${LMS_JWT_SECRET}
+    expire-minutes: 120

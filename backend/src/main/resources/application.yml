@@ -1,0 +1,41 @@
+server:
+  # 本机 8080 常被其他 Spring 项目占用，默认改到 8081；
+  # 想改回去只动这一行，README 与前端代理同步改。
+  port: 8081
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
+
+spring:
+  application:
+    name: library-management-system
+  profiles:
+    active: dev
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    default-property-inclusion: non_null
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    # 演示时打开 SQL 日志，答辩现场能看到每条 SQL 怎么拼的
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    banner: false
+    db-config:
+      id-type: auto
+
+lms:
+  jwt:
+    # HS256 要求密钥不少于 32 字节
+    secret: lms-javaee-2026-group-secret-key-change-it-in-prod
+    expire-minutes: 120
+    header: Authorization
+    prefix: "Bearer "
+
+logging:
+  level:
+    com.lms: debug
